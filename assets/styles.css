@@ -405,3 +405,11 @@ html[data-contrast="on"] .toc a.active { color: #ffff00; }
     user-select: none !important;
   }
 }
+
+
+/* A tananyag folyószövege sorkizárt; a címsorok, kódok és menük változatlanok. */
+.lesson-page .article p,
+.lesson-page .article .note {
+  text-align: justify;
+  text-justify: inter-word;
+}
