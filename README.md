@@ -1,3 +1,7 @@
+## 3. változat – 2026. november 9.
+
+A demók teljes képernyőmagasságú szerkesztő + rajzterület nézetben futnak, bal oldali menü, fölösleges leírás és utólagos példalista nélkül. A tananyag 1.1–1.6 számozott alfejezetet, szűkített középső tartalmat és jobb oldali tartalomjegyzéket tartalmaz. A Canvas háttér világos témában fehér, sötét/kisegítő módokban fekete.
+
 # Bevezetés a számítógépi grafikába – webes tananyag
 
 Az első fejezet: **Grafikus primitívek JavaScriptben**. A régi C# WinForms `01_Primitives` és `02_MouseHandling` példái alapján készült, böngészőben futtatható változat.

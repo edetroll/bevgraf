@@ -3,36 +3,15 @@ window.BevGrafExamples = {
   pixel: {
     hu: {
       title: "Képpont (pixel)",
-      lead: "Egy képpont színét az (x, y) koordinátájával adjuk meg. A program egy 1 × 1 képpontos négyzetet rajzol, majd képpontonként állít elő egy színmintát.",
+      lead: "Egy képpont színét az (x, y) koordinátájával adjuk meg. A program képpontonként rajzol egy színmintát.",
       hint: "Módosítsd az RGB-összetevőket és a ciklushatárokat. Figyeld meg, hogyan változik a színminta!"
     },
     en: {
       title: "Pixel",
-      lead: "A pixel is addressed by its (x, y) coordinates. The program draws a 1 × 1 pixel rectangle, then constructs a colour pattern pixel by pixel.",
+      lead: "A pixel is addressed by its (x, y) coordinates. This program creates a pixel-by-pixel colour pattern.",
       hint: "Modify the RGB components and loop bounds. Observe the resulting colour pattern."
     },
-    source: `// A Canvas rajzterületének közepén egy piros pixel.
-const center = {
-  x: Math.floor(canvas.width / 2),
-  y: Math.floor(canvas.height / 2)
-};
-putPixel(ctx, center.x, center.y, "red");
-
-// 256 × 256 képpontos színminta.
-for (let y = 0; y < 256; y++) {
-  for (let x = 0; x < 256; x++) {
-    const red = x;
-    const green = Math.floor(Math.abs(Math.sin(x / 24)) * 255);
-    const blue = y;
-    putPixel(ctx, x + 48, y + 80,
-      rgb({red}, {green}, {blue}));
-  }
-}
-
-// A középpontot látható jelöléssel is megmutatjuk.
-ctx.strokeStyle = "#f05d5e";
-ctx.lineWidth = 1;
-ctx.strokeRect(center.x - 8, center.y - 8, 17, 17);`.replaceAll('\u001c','`').replaceAll('\u001e','$').replaceAll('\u001d','`')
+    source: "// A 256 × 256-os színminta bal felső sarkának helye.\nconst topLeft = {\n  x: Math.floor(canvas.width / 10),\n  y: Math.floor(canvas.height / 10)\n};\nputPixel(ctx, topLeft.x, topLeft.y, \"red\");\n\n// 256 × 256 képpontos színminta.\nfor (let y = 0; y < 256; y++) {\n  for (let x = 0; x < 256; x++) {\n    const red = x;\n    const green = 0;\n    const blue = 0;\n    putPixel(ctx, x + topLeft.x, y + topLeft.y,\n      `rgb(${red}, ${green}, ${blue})`);\n  }\n}\n\n// A piros pixel a minta megrajzolása után is látható marad.\nputPixel(ctx, topLeft.x, topLeft.y, \"red\");\n\n// A bal felső csúcsot látható jelöléssel is megmutatjuk.\nctx.strokeStyle = \"#f05d5e\";\nctx.lineWidth = 1;\nctx.strokeRect(topLeft.x - 8, topLeft.y - 8, 17, 17);"
   },
   line: {
     hu: {

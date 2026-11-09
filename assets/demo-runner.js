@@ -87,16 +87,14 @@
     });
     document.addEventListener("bevgraf:settings", () => {
       const l = window.BevGrafSite.language;
-      get("demoHeading").textContent = demo[l].title;
-      get("demoLead").textContent = demo[l].lead;
-      get("demoTipText").textContent = demo[l].hint;
+      const heading = get("demoHeading");
+      if (heading) heading.textContent = demo[l].title;
       document.title = demo[l].title + " – Bevezetés a számítógépi grafikába";
     });
     // A korábban betöltött nyelvi beállításokat akkor is alkalmazzuk, ha az esemény már lefutott.
     const l = window.BevGrafSite.language;
-    get("demoHeading").textContent = demo[l].title;
-    get("demoLead").textContent = demo[l].lead;
-    get("demoTipText").textContent = demo[l].hint;
+    const heading = get("demoHeading");
+    if (heading) heading.textContent = demo[l].title;
     document.title = demo[l].title + " – Bevezetés a számítógépi grafikába";
     updateHighlight(); run();
     // Az oszlopok szélessége asztali nézetben egérrel módosítható.

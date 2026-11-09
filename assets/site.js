@@ -2,7 +2,7 @@
   "use strict";
   const root = document.documentElement;
   const CHAPTERS = [
-    { number: "01", href: "index.html#fejezet-01", hu: "Grafikus primitívek", en: "Graphics primitives" }
+    { number: "1", href: "index.html#fejezet-01", hu: "Grafikus primitívek", en: "Graphics primitives" }
     // További fejezetek: ide vehetők fel. A bal oldalsáv görgethető.
   ];
   function store(key, value) { try { localStorage.setItem(key, String(value)); } catch (_) {} }
@@ -63,25 +63,38 @@
     CHAPTERS.forEach(ch => {
       const a = document.createElement("a");
       a.href = prefix + ch.href;
-      a.className = "side-link" + (ch.number === "01" ? " active" : "");
-      a.setAttribute("aria-current", ch.number === "01" && !isDemo ? "page" : "false");
+      a.className = "side-link" + (ch.number === "1" ? " active" : "");
+      a.setAttribute("aria-current", ch.number === "1" && !isDemo ? "page" : "false");
       a.innerHTML = `<strong>${ch.number}.</strong> <span data-lang="hu">${ch.hu}</span><span data-lang="en">${ch.en}</span>`;
       nav.appendChild(a);
     });
   }
   function setupToc() {
     const toc = document.querySelector(".toc");
-    if (!toc || !window.IntersectionObserver) return;
+    if (!toc) return;
     const links = [...toc.querySelectorAll('a[href^="#"]')];
-    const targets = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(ent => {
-        if (ent.isIntersecting) {
-          links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + ent.target.id));
-        }
-      });
-    }, {rootMargin: "-130px 0px -66% 0px"});
-    targets.forEach(s => observer.observe(s));
+    const targets = links.map(link => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+                         .filter(item => item.section);
+    if (!targets.length) return;
+    // The active subsection is highlighted according to the current reading position.
+    function updateActive() {
+      const offset = 170;
+      let active = targets[0];
+      for (const item of targets) {
+        if (item.section.getBoundingClientRect().top <= offset) active = item;
+        else break;
+      }
+      for (const item of targets) {
+        const selected = item === active;
+        item.link.classList.toggle("active", selected);
+        if (selected) item.link.setAttribute("aria-current", "location");
+        else item.link.removeAttribute("aria-current");
+      }
+    }
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    window.addEventListener("hashchange", updateActive);
+    updateActive();
   }
   function init() {
     renderChapterNavigation(); setupToc();
