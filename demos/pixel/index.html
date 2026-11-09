@@ -1,0 +1,50 @@
+<!doctype html><html lang="hu" data-theme="light" data-contrast="off" data-language="hu"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142a43">
+<meta name="description" content="Bevezetés a számítógépi grafikába – interaktív tananyag és JavaScript Canvas-demók">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css">
+<title>Bevezetés a számítógépi grafikába</title></head><body data-demo="pixel" data-root="../../">
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="../../index.html" aria-label="Bevezetés a számítógépi grafikába"><img src="../../assets/logo.svg" alt="" width="51" height="51"><span class="brand-text">Bevezetés a számítógépi grafikába</span></a>
+<div class="header-controls" aria-label="Megjelenítési beállítások">
+<div class="control-group">
+  <button type="button" id="mobileMenu" class="icon-button mobile-menu" aria-expanded="false" aria-controls="sidebar" title="Fejezetek / Chapters">☰</button>
+  <button type="button" id="languageButton" class="icon-button" aria-label="Switch to English">HU</button>
+  <button type="button" id="themeButton" class="icon-button" aria-label="Téma váltása">☾</button>
+  <button type="button" id="contrastButton" class="icon-button" aria-label="Kisegítő nagy kontrasztú mód" aria-pressed="false">Kontraszt</button>
+</div>
+<div class="control-group" aria-label="Betűméret / Font size">
+  <button type="button" id="readerDecrease" class="icon-button" title="Szöveg kisebb / Smaller text" aria-label="Szöveg kisebb">A−</button>
+  <button type="button" id="readerIncrease" class="icon-button" title="Szöveg nagyobb / Larger text" aria-label="Szöveg nagyobb">A+</button>
+</div>
+</div></div></header><div class="layout"><aside class="sidebar" id="sidebar" aria-label="Tananyag fejezetei / Course chapters">
+<div class="side-heading" data-ui-hu="Fejezetek" data-ui-en="Chapters">Fejezetek</div>
+<nav id="chapterNav" aria-label="Fejezetek"></nav>
+<div class="side-note"><span data-lang="hu">A lista a további fejezetekkel bővül. Az oldalsáv önállóan görgethető.</span><span data-lang="en">More chapters will be added. The sidebar scrolls independently.</span></div>
+</aside>
+<main id="main" class="content-outer">
+<div class="demo-header"><div class="breadcrumb"><a href="../../index.html"><span data-lang="hu" >Grafikus primitívek</span><span data-lang="en" >Graphics primitives</span></a> / <span data-lang="hu" >Demó</span><span data-lang="en" >Demo</span></div>
+<h1 id="demoHeading">Demó</h1><p class="lead" id="demoLead"></p></div>
+<div class="demo-workspace" id="demoWorkspace">
+<section class="demo-pane" aria-label="JavaScript kódszerkesztő">
+  <div class="pane-title"><span>JavaScript</span><div class="pane-actions">
+  <button type="button" id="codeDecrease" class="icon-button" title="Kód kisebb / Smaller code font" aria-label="Kód kisebb">A−</button>
+  <span data-code-size style="font-size:.73rem;color:var(--muted);min-width:39px;text-align:center">16 px</span>
+  <button type="button" id="codeIncrease" class="icon-button" title="Kód nagyobb / Larger code font" aria-label="Kód nagyobb">A+</button>
+  <button type="button" id="copyCode" class="icon-button" data-ui-hu="Másolás" data-ui-en="Copy">Másolás</button>
+  <button type="button" id="resetCode" class="icon-button" data-ui-hu="Visszaállítás" data-ui-en="Reset">Visszaállítás</button>
+  <button type="button" id="runCode" class="icon-button primary" data-ui-hu="Futtatás" data-ui-en="Run">Futtatás</button>
+  </div></div>
+  <div class="editor-box" id="editorBox"><pre class="highlight-layer" aria-hidden="true"><code id="highlightedCode"></code></pre><textarea id="codeEditor" class="code-editor" wrap="off" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea></div>
+  <div class="pane-hint"><span data-lang="hu" >Futtatás: Ctrl+Enter · Kódméret: Ctrl+görgő (vagy Alt+görgő) a szerkesztőben. Egyszerű görgetéskor a kód görgethető.</span><span data-lang="en" >Run: Ctrl+Enter · Code size: Ctrl+wheel (or Alt+wheel) in the editor. Ordinary scrolling scrolls the code.</span></div>
+</section>
+<div class="workspace-splitter" id="workspaceSplitter" role="separator" tabindex="0" aria-label="Panelek szélességének módosítása" aria-orientation="vertical" title="Húzással átméretezhető / Drag to resize"></div>
+<section class="demo-pane" aria-label="Canvas rajzterület"><div class="pane-title"><span><span data-lang="hu" >Rajzterület</span><span data-lang="en" >Canvas output</span></span><span style="font-size:.7rem;color:var(--muted)">860 × 480</span></div>
+<div class="canvas-wrap"><canvas width="860" height="480" id="demoCanvas" aria-label="A kód által rajzolt ábra / Drawing produced by the code"></canvas><div class="canvas-caption"><span data-lang="hu" >A kód szerkesztése után kattints a Futtatás gombra.</span><span data-lang="en" >Click Run after editing the code.</span></div></div>
+<div id="runnerStatus" class="runner-status" role="status" aria-live="polite"></div></section></div>
+<p class="demo-tip"><strong><span data-lang="hu" >Próbáld ki!</span><span data-lang="en" >Try it!</span></strong> <span id="demoTipText"></span></p>
+<footer class="footer" style="max-width:1410px;margin-left:auto;margin-right:auto"><a href="../../index.html"><span data-lang="hu" >Vissza a fejezethez</span><span data-lang="en" >Back to chapter</span></a></footer>
+</main></div><script src="../../assets/highlight.js"></script>
+<script src="../../assets/site.js"></script>
+<script src="../../assets/graphics.js"></script>
+<script src="../../assets/examples.js"></script>
+<script src="../../assets/demo-runner.js"></script></body></html>

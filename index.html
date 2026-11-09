@@ -1,59 +1,119 @@
-<!doctype html>
-<html lang="hu">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Bevezetés a számítógépi grafikába – interaktív, kétnyelvű egyetemi tananyag.">
-  <title>Bevezetés a számítógépi grafikába</title>
-  <link rel="stylesheet" href="css/main.css">
-  <script>
-    (() => { try { document.documentElement.dataset.theme = localStorage.getItem('bevgraf-theme') || 'light'; } catch {} })();
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']], displayMath: [['\\[', '\\]'], ['$$', '$$']] },
-      options: { enableMenu: false },
-      startup: { typeset: true, ready: () => { MathJax.startup.defaultReady(); document.dispatchEvent(new Event('mathjax-ready')); } }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-  <script type="module" src="js/app.js"></script>
-</head>
-<body class="reader-page">
-  <header class="topbar">
-    <button class="icon-button mobile-menu" id="menuToggle" type="button" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="sidebar">☰</button>
-    <a class="brand" href="index.html" aria-label="Főoldal">
-      <span class="brand-mark" aria-hidden="true">⌁</span>
-      <span class="brand-copy"><strong data-i18n="courseShort">Számítógépi grafika</strong><small data-i18n="courseType">Interaktív tananyag</small></span>
-    </a>
-    <div class="topbar-actions">
-      <label class="control-label" for="languageSelect" data-i18n="language">Nyelv</label>
-      <select id="languageSelect" class="header-select" aria-label="Language / Nyelv"><option value="hu">HU</option><option value="en">EN</option></select>
-      <label class="control-label" for="themeSelect" data-i18n="appearance">Megjelenés</label>
-      <select id="themeSelect" class="header-select theme-select" aria-label="Megjelenés / Appearance">
-        <option value="light" data-i18n="light">Világos</option>
-        <option value="dark" data-i18n="dark">Sötét</option>
-        <option value="contrast" data-i18n="contrast">Nagy kontraszt</option>
-      </select>
-    </div>
-  </header>
-  <div class="reader-layout">
-    <aside class="sidebar" id="sidebar" aria-label="Tananyag navigáció">
-      <div class="sidebar-inner">
-        <div class="sidebar-caption" data-i18n="chapters">FEJEZETEK</div>
-        <nav id="chapterNav"></nav>
-        <div class="sidebar-divider"></div>
-        <div class="sidebar-caption" data-i18n="onThisPage">EZEN AZ OLDALON</div>
-        <nav id="sectionNav" class="section-nav"></nav>
-        <div class="sidebar-footer" data-i18n="courseFooter">Bevezetés a számítógépi grafikába · 1. verzió</div>
-      </div>
-    </aside>
-    <div class="mobile-overlay" id="mobileOverlay" hidden></div>
-    <main class="reader-main" id="main">
-      <div class="article-wrap">
-        <div class="eyebrow"><span class="eyebrow-line"></span><span id="chapterTag">01. FEJEZET</span></div>
-        <article id="article" class="article" aria-live="polite"><p class="loading">A tananyag betöltése...</p></article>
-        <footer class="article-footer"><span data-i18n="footerNote">A példák a böngésző natív Canvas 2D API-ját használják.</span></footer>
-      </div>
-    </main>
-  </div>
-</body>
-</html>
+<!doctype html><html lang="hu" data-theme="light" data-contrast="off" data-language="hu"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142a43">
+<meta name="description" content="Bevezetés a számítógépi grafikába – interaktív tananyag és JavaScript Canvas-demók">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/styles.css">
+<title>Bevezetés a számítógépi grafikába</title></head>
+<body data-root=""><a class="skip-link" href="#main" style="position:absolute;left:-9999px">Ugrás a tartalomhoz</a>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="index.html" aria-label="Bevezetés a számítógépi grafikába"><img src="assets/logo.svg" alt="" width="51" height="51"><span class="brand-text">Bevezetés a számítógépi grafikába</span></a>
+<div class="header-controls" aria-label="Megjelenítési beállítások">
+<div class="control-group">
+  <button type="button" id="mobileMenu" class="icon-button mobile-menu" aria-expanded="false" aria-controls="sidebar" title="Fejezetek / Chapters">☰</button>
+  <button type="button" id="languageButton" class="icon-button" aria-label="Switch to English">HU</button>
+  <button type="button" id="themeButton" class="icon-button" aria-label="Téma váltása">☾</button>
+  <button type="button" id="contrastButton" class="icon-button" aria-label="Kisegítő nagy kontrasztú mód" aria-pressed="false">Kontraszt</button>
+</div>
+<div class="control-group" aria-label="Betűméret / Font size">
+  <button type="button" id="readerDecrease" class="icon-button" title="Szöveg kisebb / Smaller text" aria-label="Szöveg kisebb">A−</button>
+  <button type="button" id="readerIncrease" class="icon-button" title="Szöveg nagyobb / Larger text" aria-label="Szöveg nagyobb">A+</button>
+</div>
+</div></div></header>
+<div class="layout"><aside class="sidebar" id="sidebar" aria-label="Tananyag fejezetei / Course chapters">
+<div class="side-heading" data-ui-hu="Fejezetek" data-ui-en="Chapters">Fejezetek</div>
+<nav id="chapterNav" aria-label="Fejezetek"></nav>
+<div class="side-note"><span data-lang="hu">A lista a további fejezetekkel bővül. Az oldalsáv önállóan görgethető.</span><span data-lang="en">More chapters will be added. The sidebar scrolls independently.</span></div>
+</aside>
+<main class="content-outer" id="main"><div class="content-grid">
+<article class="article" id="fejezet-01">
+<div class="kicker">01. <span data-lang="hu" >fejezet</span><span data-lang="en" >chapter</span></div>
+<h1><span data-lang="hu" >Grafikus primitívek JavaScriptben</span><span data-lang="en" >Graphics primitives in JavaScript</span></h1>
+<p class="lead"><span data-lang="hu" >Az első fejezetben a rajzolás alapműveleteit és az egér eseményeinek kezelését tekintjük át. A példák a böngésző Canvas-felületén futnak, a forráskódjuk módosítható.</span><span data-lang="en" >This chapter introduces basic drawing operations and mouse event handling. Examples run on the browser Canvas and their source code can be edited.</span></p>
+<section id="vaszon" class="article-section">
+<h2><span data-lang="hu" >A rajzterület és a koordináták</span><span data-lang="en" >Canvas and coordinates</span></h2>
+<p><span data-lang="hu" >A <code>&lt;canvas&gt;</code> HTML-elem téglalap alakú rajzterületet biztosít. A program a <code>getContext("2d")</code> hívással kapja meg a rajzoláshoz szükséges objektumot.</span><span data-lang="en" >The <code>&lt;canvas&gt;</code> element provides a rectangular drawing area. The program obtains a drawing context with <code>getContext("2d")</code>.</span></p>
+<div class="coordinate-figure"><svg viewBox="0 0 410 180" role="img" aria-label="A Canvas-koordinátarendszer: origó bal felül, x jobbra, y lefelé">
+<rect x="32" y="18" width="320" height="139" rx="7" fill="none" stroke="currentColor" opacity=".2" stroke-width="1.5"/>
+<path d="M42 32H366 M42 32V167" fill="none" class="figure-line" stroke-width="2"/><path d="m359 27 7 5-7 5M37 160l5 7 5-7" fill="none" class="figure-line" stroke-width="2"/>
+<circle cx="42" cy="32" r="4" fill="var(--accent)"/><path d="M42 32L210 100" class="figure-hl" stroke-width="2.6" stroke-dasharray="5 5"/><circle cx="210" cy="100" r="4.7" fill="var(--accent)"/>
+<text x="49" y="23" class="figure-text">(0, 0)</text><text x="370" y="37" class="figure-text">x</text><text x="31" y="175" class="figure-text">y</text><text x="221" y="97" class="figure-text">(x, y)</text>
+</svg></div>
+<p><span data-lang="hu" >A kezdőpont a bal felső sarokban van. Az <em>x</em> koordináta jobbra, az <em>y</em> lefelé növekszik. A demók 860 × 480 koordinátájú rajzterületet használnak.</span><span data-lang="en" >The origin is the upper-left corner. The <em>x</em> coordinate increases to the right and <em>y</em> increases downwards. The demos use an 860 × 480 canvas coordinate system.</span></p>
+<pre class="code-sample"><code class="js-highlight">const canvas = document.querySelector(&quot;canvas&quot;);
+const ctx = canvas.getContext(&quot;2d&quot;);</code></pre>
+</section>
+<section id="pixel" class="article-section">
+<h2><span data-lang="hu" >Képpont (pixel)</span><span data-lang="en" >Pixel</span></h2>
+<p><span data-lang="hu" >A raszterkép alapeleme a képpont. A Canvas API-ban egyetlen képpontot egy 1 × 1 méretű kitöltött téglalappal jeleníthetünk meg. Később a raszteres algoritmusokat is erre az alapműveletre építjük.</span><span data-lang="en" >The pixel is the basic element of a raster image. On Canvas a single pixel can be represented by a filled 1 × 1 rectangle. Later raster algorithms will use this basic operation.</span></p>
+<pre class="code-sample"><code class="js-highlight">function putPixel(ctx, x, y, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
+}
+putPixel(ctx, 120, 80, &quot;red&quot;);</code></pre>
+<p><span data-lang="hu" >Két egymásba ágyazott ciklussal képpontonként összeállíthatunk egy színmintát. A demó ezt is megmutatja.</span><span data-lang="en" >Two nested loops can construct a colour pattern pixel by pixel. The demo illustrates this as well.</span></p>
+<a class="demo-link" href="demos/pixel/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
+</section>
+<section id="szakasz" class="article-section">
+<h2><span data-lang="hu" >Szakasz</span><span data-lang="en" >Line segment</span></h2>
+<p><span data-lang="hu" >A szakaszt a két végpontja határozza meg. A natív Canvas API-ban a <code>moveTo()</code> és <code>lineTo()</code> hívásokat kell egymás után használni. A későbbi geometriai algoritmusokhoz bevezetünk egy két pontot fogadó segédfüggvényt.</span><span data-lang="en" >A line segment is defined by its two endpoints. The native Canvas API uses <code>moveTo()</code> followed by <code>lineTo()</code>. We introduce a helper accepting two points to support the geometric algorithms in later chapters.</span></p>
+<pre class="code-sample"><code class="js-highlight">function drawLine(ctx, p0, p1, color, width = 1) {
+  ctx.beginPath();
+  ctx.moveTo(p0.x, p0.y);
+  ctx.lineTo(p1.x, p1.y);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.stroke();
+}</code></pre>
+<pre class="code-sample"><code class="js-highlight">const p0 = { x: 40, y: 60 };
+const p1 = { x: 320, y: 180 };
+drawLine(ctx, p0, p1, &quot;yellow&quot;, 3);</code></pre>
+<div class="note"><span data-lang="hu" >A <code>drawLine()</code> a Canvas rajzolófunkcióit hívja. A DDA és a Bresenham-féle algoritmus megvalósításakor viszont magunk határozzuk meg a szakasz képpontjait.</span><span data-lang="en" ><code>drawLine()</code> calls the Canvas drawing API. When implementing DDA or Bresenham later, we will explicitly compute the segment pixels.</span></div>
+<a class="demo-link" href="demos/line/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
+</section>
+<section id="kor" class="article-section">
+<h2><span data-lang="hu" >Kör, ellipszis és téglalap</span><span data-lang="en" >Circle, ellipse and rectangle</span></h2>
+<p><span data-lang="hu" >A kör középponttal és sugárral adható meg. Az ellipszisnél két féltengelyt is megadhatunk. A körvonal rajzolása és az alakzat kitöltése külön művelet; a téglalap pedig közvetlenül rajzolható vagy kitölthető.</span><span data-lang="en" >A circle is defined by its centre and radius. An ellipse may have different semi-axes. Drawing the outline and filling the shape are separate operations. A rectangle can be drawn or filled directly.</span></p>
+<pre class="code-sample"><code class="js-highlight">drawCircle(ctx, { x: 260, y: 180 }, 100, &quot;green&quot;, 2);
+ctx.fillStyle = &quot;blue&quot;;
+ctx.fillRect(80, 50, 200, 120);</code></pre>
+<p><span data-lang="hu" >A <code>drawCircle()</code> – a <code>drawLine()</code>-hoz hasonlóan – saját segédfüggvény. A natív Canvas-műveleteket használja.</span><span data-lang="en" >Like <code>drawLine()</code>, <code>drawCircle()</code> is our own helper using the native Canvas API.</span></p>
+<a class="demo-link" href="demos/circle/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
+</section>
+<section id="szinek" class="article-section">
+<h2><span data-lang="hu" >Színek és vonalvastagság</span><span data-lang="en" >Colours and line width</span></h2>
+<p><span data-lang="hu" >Az RGB-szín három összetevőből áll: vörös (R), zöld (G), kék (B). Mindegyik érték 0 és 255 között lehet. Az alfa-összetevő az átlátszatlanságot szabályozza.</span><span data-lang="en" >An RGB colour consists of red (R), green (G) and blue (B) components. Each ranges from 0 to 255. The alpha component controls opacity.</span></p>
+<pre class="code-sample"><code class="js-highlight">ctx.strokeStyle = &quot;rgb(255, 255, 0)&quot;;
+ctx.lineWidth = 3;
+ctx.strokeRect(130, 50, 300, 200);
+
+ctx.fillStyle = &quot;rgba(255, 0, 255, 0.6)&quot;;
+ctx.fillRect(180, 100, 200, 150);</code></pre>
+<p><span data-lang="hu" >Ebben a fejezetben a színt és a vonalvastagságot közvetlenül a kódban állítjuk. Ehhez külön kezelőpanelre nincs szükség.</span><span data-lang="en" >In this chapter colours and line widths are changed directly in source code, so no separate adjustment panel is needed.</span></p>
+<a class="demo-link" href="demos/colors/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
+</section>
+<section id="eger" class="article-section">
+<h2><span data-lang="hu" >Egérkezelés</span><span data-lang="en" >Mouse handling</span></h2>
+<p><span data-lang="hu" >Az egérműveleteket események kezelik. A <code>pointerdown</code> jelzi a lenyomást, a <code>pointermove</code> a mozgást, a <code>pointerup</code> az elengedést. A <code>wheel</code> esemény a görgő használatakor keletkezik.</span><span data-lang="en" >Mouse actions are handled by events. <code>pointerdown</code> marks a press, <code>pointermove</code> a movement and <code>pointerup</code> a release. The <code>wheel</code> event occurs when using the mouse wheel.</span></p>
+<p><span data-lang="hu" >A csatolt C#-példához hasonlóan egy sárga téglalapot mozgatunk. A lenyomáskor megvizsgáljuk, hogy a mutató az alakzaton belül van-e, majd megőrizzük a fogási pont eltolását. A görgő a téglalap méretét módosítja.</span><span data-lang="en" >As in the supplied C# program, we move a yellow rectangle. On a press we test whether the pointer is inside it and preserve the grab offset. The wheel changes the rectangle size.</span></p>
+<pre class="code-sample"><code class="js-highlight">canvas.addEventListener(&quot;pointerdown&quot;, onDown);
+canvas.addEventListener(&quot;pointermove&quot;, onMove);
+canvas.addEventListener(&quot;pointerup&quot;, onUp);
+canvas.addEventListener(&quot;wheel&quot;, onWheel);</code></pre>
+<a class="demo-link" href="demos/mouse/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
+</section>
+<section id="demok" class="article-section"><h2><span data-lang="hu" >Demóprogramok</span><span data-lang="en" >Demo programs</span></h2>
+<p><span data-lang="hu" >Minden példa külön oldalon nyílik meg. A JavaScript-kód szerkeszthető, újrafuttatható és visszaállítható. Nincs példaválasztó a demókon belül.</span><span data-lang="en" >Every example opens on its own page. You can edit, run and reset its JavaScript source. Demo pages have no example selector.</span></p>
+<div class="demo-links">
+<a class="demo-tile" href="demos/pixel/index.html"><strong><span data-lang="hu" >1. Képpont</span><span data-lang="en" >1. Pixel</span></strong><small><span data-lang="hu" >Egyetlen képpont és pixelenkénti színminta.</span><span data-lang="en" >One pixel and a pixel-by-pixel colour pattern.</span></small></a>
+<a class="demo-tile" href="demos/line/index.html"><strong><span data-lang="hu" >2. Szakasz</span><span data-lang="en" >2. Line segment</span></strong><small><span data-lang="hu" >Két végpont, szín és vonalvastagság.</span><span data-lang="en" >Two endpoints, colour and line width.</span></small></a>
+<a class="demo-tile" href="demos/circle/index.html"><strong><span data-lang="hu" >3. Kör és ellipszis</span><span data-lang="en" >3. Circle and ellipse</span></strong><small><span data-lang="hu" >Körvonalak és kitöltés.</span><span data-lang="en" >Outlines and fills.</span></small></a>
+<a class="demo-tile" href="demos/colors/index.html"><strong><span data-lang="hu" >4. Színek</span><span data-lang="en" >4. Colours</span></strong><small><span data-lang="hu" >RGB, áttetszőség, téglalap és ellipszis.</span><span data-lang="en" >RGB, transparency, rectangle and ellipse.</span></small></a>
+<a class="demo-tile" href="demos/mouse/index.html"><strong><span data-lang="hu" >5. Egérkezelés</span><span data-lang="en" >5. Mouse handling</span></strong><small><span data-lang="hu" >Téglalap mozgatása és átméretezése.</span><span data-lang="en" >Dragging and resizing a rectangle.</span></small></a>
+</div></section>
+<footer class="footer"><span data-lang="hu" >Bevezetés a számítógépi grafikába · 01. fejezet</span><span data-lang="en" >Introduction to Computer Graphics · Chapter 01</span></footer>
+</article>
+<aside class="toc" aria-label="A fejezet tartalma"><div class="toc-heading"><span data-lang="hu" >A fejezet tartalma</span><span data-lang="en" >In this chapter</span></div>
+<a href="#vaszon"><span data-lang="hu" >Rajzterület</span><span data-lang="en" >Canvas</span></a><a href="#pixel"><span data-lang="hu" >Képpont</span><span data-lang="en" >Pixel</span></a><a href="#szakasz"><span data-lang="hu" >Szakasz</span><span data-lang="en" >Line segment</span></a><a href="#kor"><span data-lang="hu" >Kör és ellipszis</span><span data-lang="en" >Circle and ellipse</span></a><a href="#szinek"><span data-lang="hu" >Színek</span><span data-lang="en" >Colours</span></a><a href="#eger"><span data-lang="hu" >Egérkezelés</span><span data-lang="en" >Mouse handling</span></a><a href="#demok"><span data-lang="hu" >Demók</span><span data-lang="en" >Demos</span></a>
+</aside>
+</div></main></div>
+<script src="assets/highlight.js"></script>
+<script src="assets/site.js"></script></body></html>
