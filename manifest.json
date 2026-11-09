@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "course": {"hu": "Bevezetés a számítógépi grafikába", "en": "Introduction to Computer Graphics"},
+  "chapters": [
+    {
+      "id": "canvas-primitives",
+      "number": "01",
+      "title": {"hu": "Grafikus primitívek JavaScriptben", "en": "Graphics primitives in JavaScript"},
+      "source": {"hu": "chapters/01-canvas/hu.md", "en": "chapters/01-canvas/en.md"},
+      "demoIds": ["primitives"]
+    }
+  ]
+}

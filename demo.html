@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Szerkeszthető Canvas 2D demonstrációk – Bevezetés a számítógépi grafikába.">
+  <title>Canvas demonstráció · Számítógépi grafika</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script>
+    (() => { try { document.documentElement.dataset.theme = localStorage.getItem('bevgraf-theme') || 'light'; } catch {} })();
+  </script>
+  <script type="module" src="js/demo.js"></script>
+</head>
+<body class="demo-page">
+  <header class="topbar demo-topbar">
+    <a class="back-link" id="backLink" href="index.html"><span aria-hidden="true">←</span><span data-i18n="back">Vissza a tananyaghoz</span></a>
+    <div class="demo-title-wrap"><span class="demo-title" id="demoTitle">Grafikus primitívek</span><span class="demo-version">Canvas 2D</span></div>
+    <div class="topbar-actions">
+      <select id="languageSelect" class="header-select" aria-label="Language / Nyelv"><option value="hu">HU</option><option value="en">EN</option></select>
+      <select id="themeSelect" class="header-select theme-select" aria-label="Megjelenés / Appearance">
+        <option value="light" data-i18n="light">Világos</option><option value="dark" data-i18n="dark">Sötét</option><option value="contrast" data-i18n="contrast">Nagy kontraszt</option>
+      </select>
+    </div>
+  </header>
+  <main class="demo-main">
+    <div class="demo-toolbar">
+      <div class="demo-toolbar-left"><label for="exampleSelect" data-i18n="example">Példa</label><select id="exampleSelect" class="toolbar-select"></select></div>
+      <div class="demo-toolbar-right">
+        <span class="status" id="runStatus" role="status">Készen áll</span>
+        <button class="button button-ghost" type="button" id="resetCode" data-i18n="resetCode">Kód visszaállítása</button>
+        <button class="button button-primary" type="button" id="runButton"><span aria-hidden="true">▶</span> <span data-i18n="run">Futtatás</span></button>
+      </div>
+    </div>
+    <div class="demo-workspace" id="workspace">
+      <section class="editor-panel" aria-label="Kódszerkesztő">
+        <div class="panel-heading"><div class="panel-heading-main"><span class="panel-dot"></span><span>algorithm.js</span></div><span class="panel-hint" data-i18n="shortcut">Ctrl / ⌘ + Enter: futtatás</span></div>
+        <div class="editor-shell" id="editorShell"><div class="line-numbers" id="lineNumbers" aria-hidden="true">1</div><textarea class="code-editor" id="codeEditor" aria-label="Szerkeszthető JavaScript kód" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off"></textarea></div>
+        <div class="editor-footnote" data-i18n="editorHelp">A <code>draw(ctx, params)</code> függvényt szerkesztheted. A Futtatás gomb újrarajzolja a képet.</div>
+      </section>
+      <div class="splitter" id="splitter" role="separator" aria-orientation="vertical" aria-label="Panelek átméretezése" tabindex="0" aria-valuemin="28" aria-valuemax="72" aria-valuenow="50"><span></span></div>
+      <section class="output-panel" aria-label="Grafikus eredmény">
+        <div class="panel-heading"><div class="panel-heading-main"><span class="panel-dot panel-dot-blue"></span><span data-i18n="output">Eredmény</span></div><span class="coordinate-readout" id="coordReadout">x: –, y: –</span></div>
+        <div class="output-body">
+          <div class="canvas-column">
+            <div class="canvas-surface"><canvas id="resultCanvas" width="920" height="560" aria-label="A JavaScript-kód által rajzolt kép"></canvas></div>
+            <div class="canvas-caption"><span id="canvasSize">920 × 560 px</span><span data-i18n="canvasNote">A rajz saját koordinátarendszert használ.</span></div>
+            <div class="message-area" id="errorPanel" role="alert" hidden></div>
+          </div>
+          <aside class="parameters-panel"><div class="parameters-header"><strong data-i18n="parameters">Paraméterek</strong><button type="button" id="resetParams" class="text-button" data-i18n="resetParameters">Alaphelyzet</button></div><p class="parameters-intro" data-i18n="parametersIntro">A módosítás után a kép automatikusan frissül.</p><div id="parameterFields" class="parameter-fields"></div></aside>
+        </div>
+      </section>
+    </div>
+    <footer class="demo-footer"><span id="exampleDescription">A rajzolás Canvas 2D-ben történik.</span><span data-i18n="safety">Futtatási korlát: 3 s · helyi böngészős végrehajtás</span></footer>
+  </main>
+</body>
+</html>
