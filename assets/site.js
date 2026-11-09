@@ -95,8 +95,74 @@
     window.addEventListener("hashchange", updateActive);
     updateActive();
   }
+  function setupSidebarResize() {
+    const handle = document.getElementById("sidebarResizer");
+    const layout = document.querySelector(".lesson-page .layout");
+    if (!handle || !layout) return;
+
+    const minWidth = 200;
+    const maxWidth = () => Math.max(minWidth, Math.min(480, Math.floor(window.innerWidth * .38)));
+    function setWidth(value, save = false) {
+      const width = Math.round(clamp(value, minWidth, maxWidth()));
+      root.style.setProperty("--sidebar-width", width + "px");
+      handle.setAttribute("aria-valuemin", String(minWidth));
+      handle.setAttribute("aria-valuemax", String(maxWidth()));
+      handle.setAttribute("aria-valuenow", String(width));
+      if (save) store("bevgraf-sidebar-width", width);
+      return width;
+    }
+    setWidth(parseInt(load("bevgraf-sidebar-width", "278"), 10) || 278);
+    window.addEventListener("resize", () => {
+      const current = parseInt(root.style.getPropertyValue("--sidebar-width"), 10) || 278;
+      setWidth(current);
+    });
+
+    let dragging = false;
+    function stopDrag(event) {
+      if (!dragging) return;
+      dragging = false;
+      root.classList.remove("sidebar-resizing");
+      if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
+      const current = parseInt(root.style.getPropertyValue("--sidebar-width"), 10) || 278;
+      setWidth(current, true);
+    }
+    handle.addEventListener("pointerdown", event => {
+      if (event.button !== 0 || window.innerWidth <= 830) return;
+      dragging = true;
+      handle.setPointerCapture(event.pointerId);
+      root.classList.add("sidebar-resizing");
+      event.preventDefault();
+    });
+    handle.addEventListener("pointermove", event => {
+      if (!dragging) return;
+      const x = event.clientX - layout.getBoundingClientRect().left;
+      setWidth(x);
+    });
+    handle.addEventListener("pointerup", stopDrag);
+    handle.addEventListener("pointercancel", stopDrag);
+    handle.addEventListener("lostpointercapture", () => {
+      if (dragging) {
+        dragging = false;
+        root.classList.remove("sidebar-resizing");
+        const current = parseInt(root.style.getPropertyValue("--sidebar-width"), 10) || 278;
+        setWidth(current, true);
+      }
+    });
+    handle.addEventListener("keydown", event => {
+      const current = parseInt(root.style.getPropertyValue("--sidebar-width"), 10) || 278;
+      let next;
+      if (event.key === "ArrowLeft") next = current - 12;
+      else if (event.key === "ArrowRight") next = current + 12;
+      else if (event.key === "Home") next = minWidth;
+      else if (event.key === "End") next = maxWidth();
+      else return;
+      event.preventDefault();
+      setWidth(next, true);
+    });
+    handle.addEventListener("dblclick", () => setWidth(278, true));
+  }
   function init() {
-    renderChapterNavigation(); setupToc();
+    renderChapterNavigation(); setupToc(); setupSidebarResize();
     const themeButton = document.getElementById("themeButton");
     themeButton?.addEventListener("click", () => { theme = theme === "light" ? "dark" : "light"; store("bevgraf-theme", theme); translateUi(); });
     document.getElementById("contrastButton")?.addEventListener("click", () => { contrast = !contrast; store("bevgraf-contrast", contrast ? "on" : "off"); translateUi(); });
