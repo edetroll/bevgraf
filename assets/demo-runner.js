@@ -62,8 +62,8 @@
       }
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#ffffff";
-      ctx.strokeStyle = "#ffffff";
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.strokeStyle = "rgb(255, 255, 255)";
       ctx.lineWidth = 1;
       try {
         const program = new Function("canvas", "ctx", "drawLine", "putPixel", "drawCircle", '"use strict";\n' + editor.value);

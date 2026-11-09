@@ -11,7 +11,7 @@ window.BevGrafExamples = {
       lead: "A pixel is addressed by its (x, y) coordinates. This program creates a pixel-by-pixel colour pattern.",
       hint: "Modify the RGB components and loop bounds. Observe the resulting colour pattern."
     },
-    source: "// A 256 × 256-os színminta bal felső sarkának helye.\nconst topLeft = {\n  x: Math.floor(canvas.width / 10),\n  y: Math.floor(canvas.height / 10)\n};\nputPixel(ctx, topLeft.x, topLeft.y, \"red\");\n\n// 256 × 256 képpontos színminta.\nfor (let y = 0; y < 256; y++) {\n  for (let x = 0; x < 256; x++) {\n    const red = x;\n    const green = 0;\n    const blue = 0;\n    putPixel(ctx, x + topLeft.x, y + topLeft.y,\n      `rgb(${red}, ${green}, ${blue})`);\n  }\n}\n\n// A piros pixel a minta megrajzolása után is látható marad.\nputPixel(ctx, topLeft.x, topLeft.y, \"red\");\n\n// A bal felső csúcsot látható jelöléssel is megmutatjuk.\nctx.strokeStyle = \"#f05d5e\";\nctx.lineWidth = 1;\nctx.strokeRect(topLeft.x - 8, topLeft.y - 8, 17, 17);"
+    source: "// A 256 × 256-os színminta bal felső sarkának helye.\nconst topLeft = {\n  x: Math.floor(canvas.width / 10),\n  y: Math.floor(canvas.height / 10)\n};\nputPixel(ctx, topLeft.x, topLeft.y, \"rgb(255, 0, 0)\");\n\n// 256 × 256 képpontos színminta.\nfor (let y = 0; y < 256; y++) {\n  for (let x = 0; x < 256; x++) {\n    const red = x;\n    const green = 0;\n    const blue = 0;\n    putPixel(ctx, x + topLeft.x, y + topLeft.y,\n      `rgb(${red}, ${green}, ${blue})`);\n  }\n}\n\n// A piros pixel a minta megrajzolása után is látható marad.\nputPixel(ctx, topLeft.x, topLeft.y, \"rgb(255, 0, 0)\");\n\n// A bal felső csúcsot látható jelöléssel is megmutatjuk.\nctx.strokeStyle = \"rgb(240, 93, 94)\";\nctx.lineWidth = 1;\nctx.strokeRect(topLeft.x - 8, topLeft.y - 8, 17, 17);"
   },
   line: {
     hu: {
@@ -27,19 +27,19 @@ window.BevGrafExamples = {
     source: `const p0 = { x: 80, y: 80 };
 const p1 = { x: 390, y: 300 };
 
-drawLine(ctx, p0, p1, "#f3b849", 4);
+drawLine(ctx, p0, p1, "rgb(243, 184, 73)", 4);
 drawLine(ctx,
   { x: 100, y: 360 },
   { x: 720, y: 90 },
-  "#56c7bf", 3);
+  "rgb(86, 199, 191)", 3);
 
 // Két tengely a rajzterület középpontjában.
 const cx = canvas.width / 2;
 const cy = canvas.height / 2;
 drawLine(ctx, { x: cx, y: 0 },
-              { x: cx, y: canvas.height }, "#899ab2", 1);
+              { x: cx, y: canvas.height }, "rgb(137, 154, 178)", 1);
 drawLine(ctx, { x: 0, y: cy },
-              { x: canvas.width, y: cy }, "#899ab2", 1);`
+              { x: canvas.width, y: cy }, "rgb(137, 154, 178)", 1);`
   },
   circle: {
     hu: {
@@ -58,34 +58,34 @@ const radius = 110;
 // Kitöltés és körvonal külön művelet.
 ctx.beginPath();
 ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
-ctx.fillStyle = "#f6d48e";
+ctx.fillStyle = "rgb(246, 212, 142)";
 ctx.fill();
-drawCircle(ctx, center, radius, "#57bba0", 3);
+drawCircle(ctx, center, radius, "rgb(87, 187, 160)", 3);
 
 // Ellipszis: vízszintes és függőleges féltengely.
 ctx.beginPath();
 ctx.ellipse(610, 235, 135, 75, 0, 0, 2 * Math.PI);
-ctx.fillStyle = "#b28df2";
+ctx.fillStyle = "rgb(178, 141, 242)";
 ctx.fill();
-ctx.strokeStyle = "#ffe59c";
+ctx.strokeStyle = "rgb(255, 229, 156)";
 ctx.lineWidth = 3;
 ctx.stroke();`
   },
   colors: {
     hu: {
       title: "Színek és kitöltés",
-      lead: "A szín megadható névvel, hexadecimális formában vagy RGB(A)-összetevőkkel. A kitöltés és a körvonal külön beállítást használ; a vonal vastagságát a kód állítja.",
+      lead: "A Canvas a színt karakterláncként kapja meg, például rgb(255, 0, 0) alakban. A kitöltés és a körvonal külön beállítást használ; a vonal vastagságát a kód állítja.",
       hint: "Próbáld ki a fillStyle, strokeStyle és lineWidth értékeinek megváltoztatását!"
     },
     en: {
       title: "Colours and fills",
-      lead: "Colours can be specified by name, hexadecimal code, or RGB(A) components. Fill and stroke have separate settings; the line width is set directly in code.",
+      lead: "Canvas accepts a CSS colour string, for example rgb(255, 0, 0). Fill and stroke have separate settings; the line width is set directly in code.",
       hint: "Experiment with fillStyle, strokeStyle and lineWidth."
     },
     source: `// Kék téglalap sárga körvonallal.
 ctx.fillStyle = "rgb(0, 0, 255)";
 ctx.fillRect(90, 90, 265, 180);
-ctx.strokeStyle = "#f7ce61";
+ctx.strokeStyle = "rgb(247, 206, 97)";
 ctx.lineWidth = 4;
 ctx.strokeRect(90, 90, 265, 180);
 
@@ -94,7 +94,7 @@ ctx.beginPath();
 ctx.ellipse(300, 190, 130, 88, 0, 0, 2 * Math.PI);
 ctx.fillStyle = "rgba(255, 0, 255, 0.62)";
 ctx.fill();
-ctx.strokeStyle = "lime";
+ctx.strokeStyle = "rgb(0, 255, 0)";
 ctx.lineWidth = 2;
 ctx.stroke();
 
@@ -102,9 +102,9 @@ ctx.stroke();
 for (let x = 0; x < 256; x++) {
   for (let y = 0; y < 75; y++) {
     putPixel(ctx, x + 455, y + 180,
-      rgb({x}, {255 - x}, {y * 3}));
+      \`rgb(\${x}, \${255 - x}, \${y * 3})\`);
   }
-}`.replaceAll('\u001c','`').replaceAll('\u001e','$').replaceAll('\u001d','`')
+}`
   },
   mouse: {
     hu: {
@@ -136,7 +136,7 @@ function pointerPosition(event) {
 
 function repaint() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#f4d163";
+  ctx.fillStyle = "rgb(244, 209, 99)";
   ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
 }
 

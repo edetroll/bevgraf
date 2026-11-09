@@ -21,7 +21,6 @@
 <div class="layout"><aside class="sidebar" id="sidebar" aria-label="Tananyag fejezetei / Course chapters">
 <div class="side-heading" data-ui-hu="Fejezetek" data-ui-en="Chapters">Fejezetek</div>
 <nav id="chapterNav" aria-label="Fejezetek"></nav>
-<div class="side-note"><span data-lang="hu">A lista a további fejezetekkel bővül. Az oldalsáv önállóan görgethető.</span><span data-lang="en">More chapters will be added. The sidebar scrolls independently.</span></div>
 </aside>
 <main class="content-outer" id="main"><div class="content-grid">
 <article class="article" id="fejezet-01">
@@ -48,7 +47,7 @@ const ctx = canvas.getContext(&quot;2d&quot;);</code></pre>
   ctx.fillStyle = color;
   ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
 }
-putPixel(ctx, 120, 80, &quot;red&quot;);</code></pre>
+putPixel(ctx, 120, 80, &quot;rgb(255, 0, 0)&quot;);</code></pre>
 <p><span data-lang="hu" >Két egymásba ágyazott ciklussal képpontonként összeállíthatunk egy színmintát. A demó ezt is megmutatja.</span><span data-lang="en" >Two nested loops can construct a colour pattern pixel by pixel. The demo illustrates this as well.</span></p>
 <a class="demo-link" href="demos/pixel/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
 </section>
@@ -65,22 +64,22 @@ putPixel(ctx, 120, 80, &quot;red&quot;);</code></pre>
 }</code></pre>
 <pre class="code-sample"><code class="js-highlight">const p0 = { x: 40, y: 60 };
 const p1 = { x: 320, y: 180 };
-drawLine(ctx, p0, p1, &quot;yellow&quot;, 3);</code></pre>
+drawLine(ctx, p0, p1, &quot;rgb(255, 255, 0)&quot;, 3);</code></pre>
 <div class="note"><span data-lang="hu" >A <code>drawLine()</code> a Canvas rajzolófunkcióit hívja. A DDA és a Bresenham-féle algoritmus megvalósításakor viszont magunk határozzuk meg a szakasz képpontjait.</span><span data-lang="en" ><code>drawLine()</code> calls the Canvas drawing API. When implementing DDA or Bresenham later, we will explicitly compute the segment pixels.</span></div>
 <a class="demo-link" href="demos/line/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
 </section>
 <section id="kor" class="article-section">
 <h2><span data-lang="hu" >1.4. Kör, ellipszis és téglalap</span><span data-lang="en" >1.4. Circle, ellipse and rectangle</span></h2>
 <p><span data-lang="hu" >A kör középponttal és sugárral adható meg. Az ellipszisnél két féltengelyt is megadhatunk. A körvonal rajzolása és az alakzat kitöltése külön művelet; a téglalap pedig közvetlenül rajzolható vagy kitölthető.</span><span data-lang="en" >A circle is defined by its centre and radius. An ellipse may have different semi-axes. Drawing the outline and filling the shape are separate operations. A rectangle can be drawn or filled directly.</span></p>
-<pre class="code-sample"><code class="js-highlight">drawCircle(ctx, { x: 260, y: 180 }, 100, &quot;green&quot;, 2);
-ctx.fillStyle = &quot;blue&quot;;
+<pre class="code-sample"><code class="js-highlight">drawCircle(ctx, { x: 260, y: 180 }, 100, &quot;rgb(0, 128, 0)&quot;, 2);
+ctx.fillStyle = &quot;rgb(0, 0, 255)&quot;;
 ctx.fillRect(80, 50, 200, 120);</code></pre>
 <p><span data-lang="hu" >A <code>drawCircle()</code> – a <code>drawLine()</code>-hoz hasonlóan – saját segédfüggvény. A natív Canvas-műveleteket használja.</span><span data-lang="en" >Like <code>drawLine()</code>, <code>drawCircle()</code> is our own helper using the native Canvas API.</span></p>
 <a class="demo-link" href="demos/circle/index.html"><span data-lang="hu" >Demó megnyitása</span><span data-lang="en" >Open demo</span> <span aria-hidden="true">↗</span></a>
 </section>
 <section id="szinek" class="article-section">
 <h2><span data-lang="hu" >1.5. Színek és vonalvastagság</span><span data-lang="en" >1.5. Colours and line width</span></h2>
-<p><span data-lang="hu" >Az RGB-szín három összetevőből áll: vörös (R), zöld (G), kék (B). Mindegyik érték 0 és 255 között lehet. Az alfa-összetevő az átlátszatlanságot szabályozza.</span><span data-lang="en" >An RGB colour consists of red (R), green (G) and blue (B) components. Each ranges from 0 to 255. The alpha component controls opacity.</span></p>
+<p><span data-lang="hu" >Az RGB-szín három összetevőből áll: vörös (R), zöld (G), kék (B). Mindegyik érték 0 és 255 közötti egész szám. A Canvas a színt például <code>"rgb(255, 0, 0)"</code> karakterláncként kapja meg. Az alfa-összetevő az átlátszatlanságot szabályozza.</span><span data-lang="en" >An RGB colour consists of red (R), green (G) and blue (B) components. Each is an integer from 0 to 255. Canvas accepts a CSS colour string such as <code>"rgb(255, 0, 0)"</code>. The alpha component controls opacity.</span></p>
 <pre class="code-sample"><code class="js-highlight">ctx.strokeStyle = &quot;rgb(255, 255, 0)&quot;;
 ctx.lineWidth = 3;
 ctx.strokeRect(130, 50, 300, 200);

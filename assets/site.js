@@ -3,7 +3,6 @@
   const root = document.documentElement;
   const CHAPTERS = [
     { number: "1", href: "index.html#fejezet-01", hu: "Grafikus primitívek", en: "Graphics primitives" }
-    // További fejezetek: ide vehetők fel. A bal oldalsáv görgethető.
   ];
   function store(key, value) { try { localStorage.setItem(key, String(value)); } catch (_) {} }
   function load(key, fallback) { try { return localStorage.getItem(key) || fallback; } catch (_) { return fallback; } }

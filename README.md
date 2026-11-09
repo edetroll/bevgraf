@@ -1,6 +1,6 @@
-## 3. változat – 2026. november 9.
+## 4. változat – 2026. november 9.
 
-A demók teljes képernyőmagasságú szerkesztő + rajzterület nézetben futnak, bal oldali menü, fölösleges leírás és utólagos példalista nélkül. A tananyag 1.1–1.6 számozott alfejezetet, szűkített középső tartalmat és jobb oldali tartalomjegyzéket tartalmaz. A Canvas háttér világos témában fehér, sötét/kisegítő módokban fekete.
+A demók teljes képernyőmagasságú szerkesztő + rajzterület nézetben futnak, bal oldali menü, fölösleges leírás és utólagos példalista nélkül. A tananyag 1.1–1.6 számozott alfejezetet tartalmaz. A jobb oldali alfejezetlista az oldal széléhez igazodik, az olvasási oszlop pedig a fennmaradó térben van középen. A Canvas háttér világos témában fehér, sötét/kisegítő módokban fekete.
 
 # Bevezetés a számítógépi grafikába – webes tananyag
 
@@ -38,5 +38,7 @@ Nyisd meg az `index.html` fájlt egy korszerű böngészőben. Nincs szerverfüg
 ## Tananyag bővítése
 
 Az `assets/site.js` fájl `CHAPTERS` tömbjében további fejezetek rögzíthetők. A bal oldalsáv fix magasságú és önállóan görgethető. A következő fejezetekhez külön HTML-fájl hozható létre; jelenleg csak az első létezik, így előrehaladott demók nem láthatók.
+
+Az oktatási JavaScript-példákban a színek `rgb(r, g, b)`, illetve `rgba(r, g, b, a)` alakban szerepelnek. A Canvas ezekhez CSS-színkarakterláncot vár; közvetlenül három szám nem adható a `fillStyle` vagy `strokeStyle` értékeként.
 
 Az `assets/graphics.js` függvényei a Canvas API-ra épülő kényelmi segédek. A későbbi raszteres algoritmusokat (például DDA, Bresenham) célszerű ezektől megkülönböztetve, saját képpontszámítással bevezetni.
