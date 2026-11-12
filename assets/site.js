@@ -2,7 +2,9 @@
   "use strict";
   const root = document.documentElement;
   const CHAPTERS = [
-    { number: "1", href: "index.html#fejezet-01", hu: "Grafikus primitívek", en: "Graphics primitives" }
+    { number: "1", href: "index.html#fejezet-01", hu: "Grafikus primitívek", en: "Graphics primitives" },
+    { number: "2", href: "chapters/02/index.html", hu: "Szakaszrajzoló algoritmusok", en: "Line rasterisation algorithms" },
+    { number: "3", href: "chapters/03/index.html", hu: "Körrajzoló algoritmusok", en: "Circle rasterisation algorithms" }
   ];
   function store(key, value) { try { localStorage.setItem(key, String(value)); } catch (_) {} }
   function load(key, fallback) { try { return localStorage.getItem(key) || fallback; } catch (_) { return fallback; } }
@@ -58,12 +60,13 @@
     const nav = document.getElementById("chapterNav");
     if (!nav) return;
     const prefix = document.body.dataset.root || "";
+    const activeChapter = document.body.dataset.chapter || "1";
     const isDemo = document.body.dataset.demo;
     CHAPTERS.forEach(ch => {
       const a = document.createElement("a");
       a.href = prefix + ch.href;
-      a.className = "side-link" + (ch.number === "1" ? " active" : "");
-      a.setAttribute("aria-current", ch.number === "1" && !isDemo ? "page" : "false");
+      a.className = "side-link" + (ch.number === activeChapter ? " active" : "");
+      a.setAttribute("aria-current", ch.number === activeChapter && !isDemo ? "page" : "false");
       a.innerHTML = `<strong>${ch.number}.</strong> <span data-lang="hu">${ch.hu}</span><span data-lang="en">${ch.en}</span>`;
       nav.appendChild(a);
     });

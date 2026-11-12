@@ -1,0 +1,20 @@
+<!doctype html><html lang="hu" data-theme="light" data-contrast="off" data-language="hu"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#28549b"><title>Midpoint – általános eset – Bevezetés a számítógépi grafikába</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/styles.css"></head>
+  <body class="demo-page" data-demo="midpoint-general" data-root="../../">
+  <header class="topbar demo-topbar"><div class="topbar-inner demo-topbar-inner">
+  <div class="demo-title-group"><a href="../../chapters/02/index.html" class="demo-back" aria-label="Vissza a fejezethez">←</a><img src="../../assets/logo.svg" class="demo-logo" width="34" height="34" alt=""><span id="demoHeading" class="demo-title">Midpoint – általános eset</span></div>
+  <div class="header-controls"><div class="control-group"><button type="button" id="languageButton" class="icon-button">HU</button><button type="button" id="themeButton" class="icon-button">☾</button><button type="button" id="contrastButton" class="icon-button">Kontraszt</button></div></div></div></header>
+  <main class="demo-main" id="main"><div class="demo-workspace" id="demoWorkspace">
+  <section class="demo-pane" aria-label="Szerkeszthető JavaScript-forráskód">
+  <div class="pane-title"><span>JavaScript</span><div class="pane-actions">
+  <button type="button" id="codeDecrease" class="icon-button" aria-label="Kód betűmérete kisebb">A−</button><span data-code-size class="code-size-label">16 px</span><button type="button" id="codeIncrease" class="icon-button" aria-label="Kód betűmérete nagyobb">A+</button>
+  <button type="button" id="copyCode" class="icon-button" data-ui-hu="Másolás" data-ui-en="Copy">Másolás</button><button type="button" id="resetCode" class="icon-button" data-ui-hu="Visszaállítás" data-ui-en="Reset">Visszaállítás</button><button type="button" id="runCode" class="icon-button primary" data-ui-hu="Futtatás" data-ui-en="Run">Futtatás</button>
+  </div></div><div class="editor-box" id="editorBox"><pre class="highlight-layer" aria-hidden="true"><code id="highlightedCode"></code></pre><textarea id="codeEditor" class="code-editor" wrap="off" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="JavaScript-kódszerkesztő"></textarea></div><div class="pane-hint"><span data-lang="hu">Ctrl+Enter: futtatás · Ctrl+görgő: kódméret</span><span data-lang="en">Ctrl+Enter: run · Ctrl+wheel: code size</span></div></section>
+  <div class="workspace-splitter" id="workspaceSplitter" role="separator" tabindex="0" aria-label="A panelek szélességének módosítása" aria-orientation="vertical"></div>
+  <section class="demo-pane" aria-label="Két grafikus nézet"><div class="raster-stack"><div class="raster-stage"><strong><span data-lang="hu">Ideális alakzat</span><span data-lang="en">Ideal shape</span></strong><canvas id="idealCanvas" width="860" height="190" aria-label="Ideális geometriai alakzat"></canvas></div><div class="raster-stage grid-stage"><strong><span data-lang="hu">Kiválasztott képpontok, nagyítva</span><span data-lang="en">Selected pixels, magnified</span></strong><canvas id="gridCanvas" width="860" height="470" aria-label="A raszterizált alakzat nagyméretű képpontokkal"></canvas></div></div><div id="runnerStatus" class="runner-status" role="status" aria-live="polite"></div></section>
+  </div></main>
+  <script src="../../assets/highlight.js"></script><script src="../../assets/site.js"></script><script src="../../assets/raster-render.js"></script><script src="../../assets/raster-examples.js"></script><script src="../../assets/raster-demo-runner.js"></script>
+  </body></html>
